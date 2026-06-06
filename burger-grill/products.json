@@ -71,5 +71,28 @@
     "imagem": "/assets/refri-500.jpg",
     "categoria": "bebida"
   }
+
+  {
+    "id": "frango-passarinho",
+    "nome": "Frango à Passarinho",
+    "descricao": "400g de frango temperado + limão + alho frito",
+    "preco": 32.90,
+    "imagem": "/assets/frango-passarinho.jpg",
+    "categoria": "porcao"
+  },
 ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 
