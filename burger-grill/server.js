@@ -117,13 +117,14 @@ function validateOrderInput(body) {
 }
 
 // ---------- ID generator ----------
-function nextOrderId(existing) {
-  let max = 0;
-  for (const o of existing) {
-    const m = /^ORD-(\d+)$/.exec(o.id || '');
-    if (m) max = Math.max(max, parseInt(m[1], 10));
-  }
-  return 'ORD-' + String(max + 1).padStart(4, '0');
+function nextOrderId() {
+  const hoje = new Date()
+  const data = hoje.toISOString().slice(0,10).replace(/-/g,'') // 20250606
+  const hora = hoje.getHours().toString().padStart(2,'0')
+  const min = hoje.getMinutes().toString().padStart(2,'0') 
+  const seg = hoje.getSeconds().toString().padStart(2,'0')
+  const ms = hoje.getMilliseconds().toString().padStart(3,'0') // novo
+  return `ORD-${data}${hora}${min}${seg}${ms}` // ORD-20250606143022915
 }
 
 // ---------- WhatsApp message ----------
@@ -256,4 +257,3 @@ app.get('/api/order/:id', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Burger Grill running on http://localhost:${PORT}`);
 });
-
