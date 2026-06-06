@@ -59,7 +59,7 @@
     "id": "refri-lata",
     "nome": "Refrigerante Lata",
     "descricao": "350ml gelado",
-    "preco": 6.00,
+    "preco": 5.00,
     "imagem": "/assets/refri-lata.jpg",
     "categoria": "bebida"
   },
@@ -67,7 +67,7 @@
     "id": "refri-500",
     "nome": "Refrigerante 500ml",
     "descricao": "Garrafa 500ml gelada",
-    "preco": 8.00,
+    "preco": 6.00,
     "imagem": "/assets/refri-500.jpg",
     "categoria": "bebida"
   }
