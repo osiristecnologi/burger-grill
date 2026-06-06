@@ -1,1 +1,75 @@
+[
+  {
+    "id": "para-combo",
+    "nome": "Para Combo",
+    "descricao": "X-Burger + Batata + Refri Lata",
+    "preco": 19.90,
+    "imagem": "/assets/para-combo.jpg",
+    "categoria": "combo"
+  },
+  {
+    "id": "gourmet-combo",
+    "nome": "Gourmet Combo",
+    "descricao": "Burguer Duplo + Batata + Refri 500ml",
+    "preco": 34.90,
+    "imagem": "/assets/gourmet-combo.jpg",
+    "categoria": "combo"
+  },
+  {
+    "id": "xburger",
+    "nome": "X-Burger",
+    "descricao": "Hambúrguer artesanal, queijo, alface, tomate",
+    "preco": 22.90,
+    "imagem": "/assets/xburger.jpg",
+    "categoria": "hamburguer"
+  },
+  {
+    "id": "xbacon",
+    "nome": "X-Bacon",
+    "descricao": "Hambúrguer artesanal, queijo, bacon crocante",
+    "preco": 26.90,
+    "imagem": "/assets/xbacon.jpg",
+    "categoria": "hamburguer"
+  },
+  {
+    "id": "top-fries",
+    "nome": "Top Fries",
+    "descricao": "Batata frita + Cheddar + Bacon + Cebola",
+    "preco": 24.90,
+    "imagem": "/assets/top-fries.jpg",
+    "categoria": "porcao"
+  },
+  {
+    "id": "frango-crispy",
+    "nome": "Frango Crispy",
+    "descricao": "500g de frango empanado + molho especial",
+    "preco": 29.90,
+    "imagem": "/assets/frango-crispy.jpg",
+    "categoria": "porcao"
+  },
+  {
+    "id": "costela-bbq",
+    "nome": "Costela BBQ",
+    "descricao": "500g costela desfiada + Batata + Barbecue",
+    "preco": 39.90,
+    "imagem": "/assets/costela-bbq.jpg",
+    "categoria": "porcao"
+  },
+  {
+    "id": "refri-lata",
+    "nome": "Refrigerante Lata",
+    "descricao": "350ml gelado",
+    "preco": 6.00,
+    "imagem": "/assets/refri-lata.jpg",
+    "categoria": "bebida"
+  },
+  {
+    "id": "refri-500",
+    "nome": "Refrigerante 500ml",
+    "descricao": "Garrafa 500ml gelada",
+    "preco": 8.00,
+    "imagem": "/assets/refri-500.jpg",
+    "categoria": "bebida"
+  }
+]
 
