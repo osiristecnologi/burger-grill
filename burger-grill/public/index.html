@@ -1,1 +1,184 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Burger Grill — Força no Sabor</title>
+<link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <span class="tag">Hambúrgueres Artesanais</span>
+    <h1>
+      <span class="brand-burger">BURGER</span>
+      <span class="brand-grill">GRILL</span>
+    </h1>
+    <p class="slogan">— FORÇA NO SABOR —</p>
+    <p class="sub">O melhor hambúrguer do bairro!<br/>
+      <span class="muted">Suculentos • Grelhados na brasa • Ingredientes frescos</span></p>
+    <nav class="hero-nav">
+      <a href="#cardapio" class="cta">Ver Cardápio</a>
+      <a href="#historico" class="cta cta-ghost">Meus Pedidos</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- CARDÁPIO -->
+  <section id="cardapio" class="menu">
+    <h2>Cardápio</h2>
+    <div class="cat-tabs" id="cat-tabs"></div>
+    <div id="menu-grid" class="grid"><div class="loading">Carregando…</div></div>
+  </section>
+
+  <!-- CARRINHO -->
+  <section id="carrinho" class="cart-section">
+    <h2>Seu Carrinho</h2>
+    <div id="cart" class="cart"><p class="empty">Toque em <strong>+</strong> nos itens para montar seu pedido.</p></div>
+    <button id="goto-checkout" class="primary-btn" disabled>Finalizar pedido</button>
+  </section>
+
+  <!-- CHECKOUT -->
+  <section id="checkout" class="checkout hidden">
+    <h2>Finalizar Pedido</h2>
+
+    <div class="modal-types">
+      <button class="type-btn" data-type="mesa"><span>🍽️</span>Mesa</button>
+      <button class="type-btn" data-type="entrega"><span>🛵</span>Entrega</button>
+      <button class="type-btn" data-type="retirada"><span>🏃</span>Retirada</button>
+    </div>
+
+    <form id="checkout-form" class="hidden" novalidate>
+      <input type="hidden" name="tipo" id="tipo-input" />
+
+      <!-- MESA -->
+      <div data-form="mesa" class="form-block hidden">
+        <label>Nome (opcional)
+          <input name="cliente" maxlength="80" autocomplete="name" />
+        </label>
+        <label>Número da Mesa *
+          <input name="mesa" maxlength="10" required inputmode="numeric" />
+        </label>
+      </div>
+
+      <!-- ENTREGA -->
+      <div data-form="entrega" class="form-block hidden">
+        <label>Nome *
+          <input name="cliente" maxlength="80" required autocomplete="name" />
+        </label>
+        <label>Telefone (WhatsApp) *
+          <input name="telefone" maxlength="15" required inputmode="tel" autocomplete="tel" placeholder="(62) 99999-9999" />
+        </label>
+        <div class="row2">
+          <label class="flex-2">Rua *
+            <input name="rua" maxlength="120" required autocomplete="address-line1" />
+          </label>
+          <label>Número *
+            <input name="numero" maxlength="20" required />
+          </label>
+        </div>
+        <label>Bairro *
+          <input name="bairro" maxlength="80" required />
+        </label>
+        <label>Complemento
+          <input name="complemento" maxlength="120" />
+        </label>
+        <label>Ponto de Referência
+          <input name="referencia" maxlength="120" />
+        </label>
+      </div>
+
+      <!-- RETIRADA -->
+      <div data-form="retirada" class="form-block hidden">
+        <label>Nome *
+          <input name="cliente" maxlength="80" required autocomplete="name" />
+        </label>
+        <label>Telefone (WhatsApp) *
+          <input name="telefone" maxlength="15" required inputmode="tel" autocomplete="tel" placeholder="(62) 99999-9999" />
+        </label>
+        <p class="info-box">🏃 Retirarei o pedido no balcão.</p>
+      </div>
+
+      <label>Observação (opcional)
+        <textarea name="observacao" maxlength="240" rows="2" placeholder="Ex.: sem cebola, ponto da carne…"></textarea>
+      </label>
+
+      <div class="checkout-summary" id="checkout-summary"></div>
+
+      <p id="form-err" class="err"></p>
+
+      <div class="checkout-actions">
+        <button type="button" id="back-to-cart" class="ghost-btn">Voltar</button>
+        <button type="submit" class="wa-btn">
+          <svg viewBox="0 0 24 24" class="wa-icon" aria-hidden="true"><path fill="currentColor" d="M19.11 17.21c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.17-1.34-.8-.71-1.34-1.59-1.5-1.86-.16-.27-.02-.41.12-.55.13-.13.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.83-2.01-.22-.53-.45-.46-.61-.46-.16 0-.34-.02-.52-.02-.18 0-.48.07-.73.34-.25.27-.95.93-.95 2.27 0 1.34.97 2.63 1.11 2.81.14.18 1.91 2.92 4.63 4.09.65.28 1.16.45 1.56.58.65.21 1.25.18 1.72.11.52-.08 1.6-.65 1.83-1.28.23-.63.23-1.17.16-1.28-.07-.11-.25-.18-.52-.32M12.04 21.5c-1.6 0-3.16-.43-4.53-1.25l-.32-.19-3.36.88.9-3.27-.21-.34a8.43 8.43 0 0 1-1.31-4.54c0-4.66 3.79-8.45 8.45-8.45 2.26 0 4.38.88 5.98 2.48a8.4 8.4 0 0 1 2.47 5.98c0 4.66-3.79 8.46-8.07 8.46Zm7.18-15.64A10.07 10.07 0 0 0 12.04 3C6.5 3 2 7.5 2 13.04c0 1.77.46 3.5 1.34 5.02L2 23l5.05-1.32a10 10 0 0 0 4.99 1.27h.01c5.54 0 10.04-4.5 10.04-10.04 0-2.68-1.04-5.2-2.94-7.05Z"/></svg>
+          Enviar pedido pelo WhatsApp
+        </button>
+      </div>
+    </form>
+  </section>
+
+  <!-- CONFIRMAÇÃO -->
+  <section id="confirm" class="confirm hidden">
+    <h2>Pedido enviado!</h2>
+    <div class="confirm-card">
+      <p class="muted small">Número do pedido</p>
+      <p class="order-id" id="confirm-id">ORD-0000</p>
+      <p>Abrimos o WhatsApp com a sua mensagem. Se não abriu, clique abaixo.</p>
+      <a id="confirm-wa" class="wa-btn" href="#" target="_blank" rel="noopener">Abrir WhatsApp</a>
+
+      <hr/>
+
+      <h3>Pagamento via Pix</h3>
+      <div class="pay-grid">
+        <div class="qr-box">
+          <img src="/api/pix-qr" alt="QR Code Pix" />
+          <p class="muted small">Aponte a câmera do app do banco</p>
+        </div>
+        <div class="key-box">
+          <p class="muted">Chave Pix (e-mail):</p>
+          <code id="pix-key">—</code>
+          <button id="copy-key" class="copy-btn">Copiar chave</button>
+          <p class="muted small">Recebedor: <span id="pix-receiver">—</span></p>
+          <p class="info-box">Após realizar o pagamento envie o comprovante pelo WhatsApp.</p>
+        </div>
+      </div>
+
+      <button id="new-order" class="ghost-btn">Fazer novo pedido</button>
+    </div>
+  </section>
+
+  <!-- HISTÓRICO -->
+  <section id="historico" class="history">
+    <h2>Meus Pedidos</h2>
+    <p class="muted small">Pedidos feitos neste dispositivo.</p>
+    <div id="history-list" class="history-list"><p class="empty">Você ainda não fez pedidos.</p></div>
+  </section>
+
+  <!-- CONTATO -->
+  <section class="contact">
+    <h2>Fale conosco</h2>
+    <p>Atendemos todos os dias • 18h às 23h</p>
+    <a class="wa-banner" id="wa-banner" href="#" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" class="wa-icon" aria-hidden="true"><path fill="currentColor" d="M19.11 17.21c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.17-1.34-.8-.71-1.34-1.59-1.5-1.86-.16-.27-.02-.41.12-.55.13-.13.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.83-2.01-.22-.53-.45-.46-.61-.46-.16 0-.34-.02-.52-.02-.18 0-.48.07-.73.34-.25.27-.95.93-.95 2.27 0 1.34.97 2.63 1.11 2.81.14.18 1.91 2.92 4.63 4.09.65.28 1.16.45 1.56.58.65.21 1.25.18 1.72.11.52-.08 1.6-.65 1.83-1.28.23-.63.23-1.17.16-1.28-.07-.11-.25-.18-.52-.32M12.04 21.5c-1.6 0-3.16-.43-4.53-1.25l-.32-.19-3.36.88.9-3.27-.21-.34a8.43 8.43 0 0 1-1.31-4.54c0-4.66 3.79-8.45 8.45-8.45 2.26 0 4.38.88 5.98 2.48a8.4 8.4 0 0 1 2.47 5.98c0 4.66-3.79 8.46-8.07 8.46Zm7.18-15.64A10.07 10.07 0 0 0 12.04 3C6.5 3 2 7.5 2 13.04c0 1.77.46 3.5 1.34 5.02L2 23l5.05-1.32a10 10 0 0 0 4.99 1.27h.01c5.54 0 10.04-4.5 10.04-10.04 0-2.68-1.04-5.2-2.94-7.05Z"/></svg>
+      <span><strong id="wa-display">WhatsApp</strong><br/><small>Clique para chamar</small></span>
+    </a>
+  </section>
+
+</main>
+
+<a class="wa-float" id="wa-float" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M19.11 17.21c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.17-1.34-.8-.71-1.34-1.59-1.5-1.86-.16-.27-.02-.41.12-.55.13-.13.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.83-2.01-.22-.53-.45-.46-.61-.46-.16 0-.34-.02-.52-.02-.18 0-.48.07-.73.34-.25.27-.95.93-.95 2.27 0 1.34.97 2.63 1.11 2.81.14.18 1.91 2.92 4.63 4.09.65.28 1.16.45 1.56.58.65.21 1.25.18 1.72.11.52-.08 1.6-.65 1.83-1.28.23-.63.23-1.17.16-1.28-.07-.11-.25-.18-.52-.32M12.04 21.5c-1.6 0-3.16-.43-4.53-1.25l-.32-.19-3.36.88.9-3.27-.21-.34a8.43 8.43 0 0 1-1.31-4.54c0-4.66 3.79-8.45 8.45-8.45 2.26 0 4.38.88 5.98 2.48a8.4 8.4 0 0 1 2.47 5.98c0 4.66-3.79 8.46-8.07 8.46Zm7.18-15.64A10.07 10.07 0 0 0 12.04 3C6.5 3 2 7.5 2 13.04c0 1.77.46 3.5 1.34 5.02L2 23l5.05-1.32a10 10 0 0 0 4.99 1.27h.01c5.54 0 10.04-4.5 10.04-10.04 0-2.68-1.04-5.2-2.94-7.05Z"/></svg>
+</a>
+
+<footer>
+  <p>★ BURGER GRILL — FORÇA NO SABOR ★</p>
+</footer>
+
+<script src="/app.js"></script>
+</body>
+</html>
 
