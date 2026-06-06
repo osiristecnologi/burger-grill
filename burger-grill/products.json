@@ -70,8 +70,7 @@
     "preco": 6.00,
     "imagem": "/assets/refri-500.jpg",
     "categoria": "bebida"
-  }
-
+  },
   {
     "id": "frango-passarinho",
     "nome": "Frango à Passarinho",
@@ -81,18 +80,3 @@
     "categoria": "porcao"
   }
 ]
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
