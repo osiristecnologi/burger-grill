@@ -10,7 +10,7 @@
   {
     "id": "para-combo",
     "nome": "Para Combo",
-    "descricao": "X-Burger + Batata + Refri Lata",
+    "descricao": "X-Burger + Batata + Refri Lata 350ml",
     "preco": 19.90,
     "imagem": "/assets/para-combo.jpg",
     "categoria": "combo"
@@ -18,7 +18,7 @@
   {
     "id": "gourmet-combo",
     "nome": "Gourmet Combo",
-    "descricao": "Burguer Duplo + Batata + Refri 500ml",
+    "descricao": "Burguer Duplo + Batata + Refri Lata 350ml",
     "preco": 34.90,
     "imagem": "/assets/gourmet-combo.jpg",
     "categoria": "combo"
