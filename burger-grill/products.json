@@ -58,7 +58,7 @@
   {
     "id": "costela-bbq",
     "nome": "Costela BBQ",
-    "descricao": "500g costela de porco + Batata + Barbecue",
+    "descricao": "1kg costela de porco + Batata + Barbecue",
     "preco": 39.90,
     "imagem": "/assets/costela-bbq.jpg",
     "categoria": "porcao"
