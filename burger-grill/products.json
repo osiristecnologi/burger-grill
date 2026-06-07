@@ -75,8 +75,8 @@
     "id": "refri-500",
     "nome": "Refrigerante 500ml",
     "descricao": "Garrafa 500ml gelada",
-    "preco": 6.00,
-    "imagem": "/assets/refri-500.jpg",
+    "preco": 8.00,
+    "imagem": "/assets/refri-2l.jpg",
     "categoria": "bebida"
   },
   {
