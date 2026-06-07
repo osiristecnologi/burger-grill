@@ -5,7 +5,7 @@
   "preco": 8.00,
   "categoria": "sobremesa",
   "descricao": "Gelado ou natural",
-  "imagem": "/img/creme-morango.jpg"
+  "imagem": "/assets/creme-morango.jpg"
 }, 
   {
     "id": "para-combo",
