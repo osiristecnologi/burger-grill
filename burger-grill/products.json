@@ -1,12 +1,16 @@
 [ 
 { 
+  {
   "id": "creme-morango",
-  "nome": "Creme de Morango 300ml", 
+  "nome": "Creme de Morango 300ml",
   "preco": 8.00,
   "categoria": "sobremesa",
   "descricao": "Gelado ou natural",
-  "imagem": "/assets/creme-morango.jpg"
-}, 
+  "imagens": [
+    "/assets/creme-morango-1.jpg",
+    "/assets/creme-morango-2.jpg",
+    "/assets/creme-morango-3.jpg"  
+  }, 
   {
     "id": "para-combo",
     "nome": "Para Combo",
