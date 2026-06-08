@@ -80,16 +80,31 @@ function renderMenu() {
           <button data-act="inc" data-id="${p.id}" aria-label="Adicionar">+</button>
         </div>
       </div>`;
-    const img = card.querySelector('img');
-    img.src = p.imagem || '';
-    img.addEventListener('error', () => {
-      img.remove();
-      card.querySelector('.img').textContent = emojiFor(p.categoria);
-    });
-    card.querySelector('.cat').textContent = p.categoria;
-    card.querySelector('h3').textContent = p.nome;
-    card.querySelector('.desc').textContent = p.descricao;
-    grid.appendChild(card);
+const imgEl = card.querySelector('img');
+const fotos = p.imagens || (p.imagem? [p.imagem] : [])
+const primeiraFoto = fotos[0] || ''
+
+if (primeiraFoto) {
+  imgEl.src = primeiraFoto;
+  imgEl.addEventListener('error', () => {
+    imgEl.remove();
+    card.querySelector('.img').textContent = emojiFor(p.categoria);
+  });
+
+  // Bônus: clica pra trocar de foto
+  if (fotos.length > 1) {
+    let idx = 0
+    imgEl.style.cursor = 'pointer'
+    imgEl.title = 'Clique para ver mais fotos'
+    imgEl.addEventListener('click', (e) => {
+      e.stopPropagation() // não abre o add-to-cart
+      idx = (idx + 1) % fotos.length
+      imgEl.src = fotos[idx]
+    })
+  }
+} else {
+  imgEl.remove();
+  card.querySelector('.img').textContent = emojiFor(p.categoria);   
   }
   grid.onclick = (e) => {
     const b = e.target.closest('button');
