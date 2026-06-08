@@ -91,21 +91,20 @@ if (primeiraFoto) {
     card.querySelector('.img').textContent = emojiFor(p.categoria);
   });
 
-  // Bônus: clica pra trocar de foto
   if (fotos.length > 1) {
     let idx = 0
     imgEl.style.cursor = 'pointer'
     imgEl.title = 'Clique para ver mais fotos'
     imgEl.addEventListener('click', (e) => {
-      e.stopPropagation() // não abre o add-to-cart
+      e.stopPropagation()
       idx = (idx + 1) % fotos.length
       imgEl.src = fotos[idx]
     })
   }
 } else {
   imgEl.remove();
-  card.querySelector('.img').textContent = emojiFor(p.categoria);   
-  }
+  card.querySelector('.img').textContent = emojiFor(p.categoria);
+}   
   grid.onclick = (e) => {
     const b = e.target.closest('button');
     if (!b) return;
