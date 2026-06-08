@@ -37,7 +37,7 @@ function formatPhone(d) {
     const rest = m.slice(4);
     const a = rest.slice(0, rest.length - 4);
     const b = rest.slice(-4);
-    return `+\( {cc} ( \){ddd}) \( {a}- \){b}`;
+    return `+${cc} (${ddd}) ${a}-${b}`;
   }
   return m;
 }
@@ -68,12 +68,12 @@ function renderMenu() {
     card.className = 'item';
     card.innerHTML = `
       <div class="img" data-emoji="${emojiFor(p.categoria)}">
-        <img alt="" loading="lazy" />
+        <img alt="${p.nome}" loading="lazy" />
       </div>
       <div class="body">
-        <span class="cat"></span>
-        <h3></h3>
-        <p class="desc"></p>
+        <span class="cat">${p.categoria}</span>
+        <h3>${p.nome}</h3>
+        <p class="desc">${p.descricao || ''}</p>
         <div class="price">${fmt(p.preco)}</div>
         <div class="add">
           <button data-act="dec" data-id="${p.id}" aria-label="Diminuir">−</button>
@@ -84,7 +84,7 @@ function renderMenu() {
 
     // Tratamento de imagens
     const imgEl = card.querySelector('img');
-    const fotos = p.imagens || (p.imagem ? [p.imagem] : []);
+    const fotos = p.imagens || (p.imagem? [p.imagem] : []);
     const primeiraFoto = fotos[0] || '';
 
     if (primeiraFoto) {
@@ -112,7 +112,7 @@ function renderMenu() {
     grid.appendChild(card);
   }
 
-  // Handler de clique dos botões + / − (corrigido: agora fora do loop)
+  // Handler de clique dos botões + / −
   grid.onclick = (e) => {
     const b = e.target.closest('button');
     if (!b) return;
@@ -133,7 +133,7 @@ function renderMenu() {
 }
 
 function emojiFor(c) {
-  return { hamburguer:'🍔', combo:'🍔', porcao:'🍟', bebida:'🥤' }[c] || '🍽️';
+  return { hamburguer:'🍔', combo:'🍔', porcao:'🍟', bebida:'🥤', sobremesa:'🍨' }[c] || '🍽️';
 }
 
 // ---------- Cart ----------
@@ -152,7 +152,7 @@ function renderCart() {
     if (!p) continue;
     const sub = p.preco * qty;
     total += sub;
-    html += `<div class="row"><span>${qty}× \( {p.nome}</span><span> \){fmt(sub)}</span></div>`;
+    html += `<div class="row"><span>${qty}× ${p.nome}</span><span>${fmt(sub)}</span></div>`;
   }
   html += `<div class="total"><span>Subtotal</span><span>${fmt(total)} <span class="pending">(servidor confirma)</span></span></div>`;
   el.innerHTML = html;
@@ -184,7 +184,7 @@ function updateCheckoutSummary() {
     if (!p) continue;
     const sub = p.preco * qty;
     total += sub;
-    html += `<div class="row" style="display:flex;justify-content:space-between"><span>${qty}× \( {p.nome}</span><span> \){fmt(sub)}</span></div>`;
+    html += `<div class="row" style="display:flex;justify-content:space-between"><span>${qty}× ${p.nome}</span><span>${fmt(sub)}</span></div>`;
   }
   html += `<div class="total"><span>Total</span><span>${fmt(total)}</span></div>`;
   el.innerHTML = html;
@@ -334,7 +334,7 @@ function renderHistory() {
       <div class="total">${fmt(o.total)}</div>
       <div class="items">${items}</div>
       <div class="actions">
-        \( {o.wa ? `<a class="resend" target="_blank" rel="noopener" href=" \){o.wa}">Reabrir no WhatsApp</a>` : ''}
+        ${o.wa ? `<a class="resend" target="_blank" rel="noopener" href="${o.wa}">Reabrir no WhatsApp</a>` : ''}
         <button class="remove" data-id="${o.id}">Remover</button>
       </div>`;
     card.querySelector('.remove').addEventListener('click', () => {
