@@ -156,17 +156,20 @@ footer{text-align:center;padding:26px 16px;border-top:2px solid var(--fire);colo
   .h-card{grid-template-columns:1fr}
   .h-card .total{text-align:left}
 }
-/* CARROSSEL DE IMAGENS */
-.item .img { 
-  position: relative; 
-  /* remove o overflow: hidden daqui */
+/* CARROSSEL DE IMAGENS - MOBILE FIRST */
+.item.img {
+  position: relative;
+  overflow: hidden;
 }
-.item .img img {
+.item.img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform.3s ease;
 }
+
+/* Setas sempre visíveis no mobile */
 .img-nav {
   position: absolute;
   top: 50%;
@@ -174,43 +177,84 @@ footer{text-align:center;padding:26px 16px;border-top:2px solid var(--fire);colo
   background: rgba(0,0,0,.7);
   color: #fff;
   border: 0;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   font-size: 28px;
-  line-height: 32px;
+  line-height: 36px;
   cursor: pointer;
-  opacity: 0;
-  transition: opacity .2s;
   z-index: 10;
   padding: 0;
+  opacity:.85;
+  transition: all.2s;
 }
-.img:hover .img-nav { opacity: 1; } /* hover na .img, não no .item */
+.img-nav:active {
+  background: var(--fire);
+  transform: translateY(-50%) scale(.9);
+}
 .img-nav.prev { left: 8px; }
 .img-nav.next { right: 8px; }
-.img-nav:hover { background: rgba(255,87,34,.9); }
 
+/* Esconde seta se só tem 1 foto */
+.img-nav.hidden { display: none; }
+
+/* Bolinhas maiores */
 .img-dots {
   position: absolute;
   bottom: 8px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 6px;
+  gap: 8px;
   z-index: 10;
-  background: rgba(0,0,0,.5);
-  padding: 4px 8px;
-  border-radius: 12px;
+  background: rgba(0,0,0,.6);
+  padding: 6px 10px;
+  border-radius: 16px;
 }
 .dot {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: rgba(255,255,255,.5);
-  transition: all .2s;
+  transition: all.3s;
 }
-.dot.active { 
-  background: #fff; 
-  width: 18px;
-  border-radius: 3px;
+.dot.active {
+  background: var(--fire2);
+  width: 24px;
+  border-radius: 4px;
+}
+
+/* Dica de swipe - aparece 1 vez */
+.swipe-hint {
+  position: absolute;
+  bottom: 45px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,.8);
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  z-index: 11;
+  pointer-events: none;
+  animation: fadeHint 3s ease forwards;
+}
+@keyframes fadeHint {
+  0%, 80% { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; }
+}
+
+/* Animação inicial - balança 1x pra mostrar que tem mais */
+.img.has-carousel img {
+  animation: peekPhoto 1.5s ease 1s 1;
+}
+@keyframes peekPhoto {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-15px); }
+}
+
+/* Desktop: hover pra deixar mais sutil */
+@media (hover: hover) {
+ .img-nav { opacity: 0; }
+ .item.img:hover.img-nav { opacity:.85; }
 }
