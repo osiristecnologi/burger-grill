@@ -157,28 +157,29 @@ footer{text-align:center;padding:26px 16px;border-top:2px solid var(--fire);colo
   .h-card .total{text-align:left}
 }
 /* CARROSSEL DE IMAGENS */
-.item .img { position: relative; }
+.item .img { position: relative; overflow: hidden; }
 .img-nav {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0,0,0,.5);
+  background: rgba(0,0,0,.6);
   color: #fff;
   border: 0;
   width: 32px;
   height: 32px;
   border-radius: 50%;
   font-size: 24px;
-  line-height: 1;
+  line-height: 28px;
   cursor: pointer;
   opacity: 0;
   transition: opacity .2s;
   z-index: 2;
+  padding: 0;
 }
 .item:hover .img-nav { opacity: 1; }
 .img-nav.prev { left: 8px; }
 .img-nav.next { right: 8px; }
-.img-nav:hover { background: rgba(0,0,0,.8); }
+.img-nav:hover { background: rgba(0,0,0,.9); }
 
 .img-dots {
   position: absolute;
