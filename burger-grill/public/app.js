@@ -31,14 +31,13 @@ async function boot() {
 function formatPhone(d) {
   if (!d) return 'WhatsApp';
   const m = d.replace(/\D/g, '');
-  // 55 62 9 8144 3598
   if (m.length >= 12) {
     const cc = m.slice(0, 2);
     const ddd = m.slice(2, 4);
     const rest = m.slice(4);
     const a = rest.slice(0, rest.length - 4);
     const b = rest.slice(-4);
-    return `+${cc} (${ddd}) ${a}-${b}`;
+    return `+\( {cc} ( \){ddd}) \( {a}- \){b}`;
   }
   return m;
 }
@@ -60,7 +59,9 @@ function renderTabs() {
 function renderMenu() {
   const grid = $('menu-grid');
   grid.innerHTML = '';
+
   const list = PRODUCTS.filter(p => activeCategory === 'todos' || p.categoria === activeCategory);
+
   for (const p of list) {
     const qty = cart.get(p.id) || 0;
     const card = document.createElement('article');
@@ -80,39 +81,52 @@ function renderMenu() {
           <button data-act="inc" data-id="${p.id}" aria-label="Adicionar">+</button>
         </div>
       </div>`;
-const imgEl = card.querySelector('img');
-const fotos = p.imagens || (p.imagem? [p.imagem] : [])
-const primeiraFoto = fotos[0] || ''
 
-if (primeiraFoto) {
-  imgEl.src = primeiraFoto;
-  imgEl.addEventListener('error', () => {
-    imgEl.remove();
-    card.querySelector('.img').textContent = emojiFor(p.categoria);
-  });
+    // Tratamento de imagens
+    const imgEl = card.querySelector('img');
+    const fotos = p.imagens || (p.imagem ? [p.imagem] : []);
+    const primeiraFoto = fotos[0] || '';
 
-  if (fotos.length > 1) {
-    let idx = 0
-    imgEl.style.cursor = 'pointer'
-    imgEl.title = 'Clique para ver mais fotos'
-    imgEl.addEventListener('click', (e) => {
-      e.stopPropagation()
-      idx = (idx + 1) % fotos.length
-      imgEl.src = fotos[idx]
-    })
+    if (primeiraFoto) {
+      imgEl.src = primeiraFoto;
+      imgEl.addEventListener('error', () => {
+        imgEl.remove();
+        card.querySelector('.img').textContent = emojiFor(p.categoria);
+      });
+
+      if (fotos.length > 1) {
+        let idx = 0;
+        imgEl.style.cursor = 'pointer';
+        imgEl.title = 'Clique para ver mais fotos';
+        imgEl.addEventListener('click', (e) => {
+          e.stopPropagation();
+          idx = (idx + 1) % fotos.length;
+          imgEl.src = fotos[idx];
+        });
+      }
+    } else {
+      imgEl.remove();
+      card.querySelector('.img').textContent = emojiFor(p.categoria);
+    }
+
+    grid.appendChild(card);
   }
-} else {
-  imgEl.remove();
-  card.querySelector('.img').textContent = emojiFor(p.categoria);
-}   
+
+  // Handler de clique dos botões + / − (corrigido: agora fora do loop)
   grid.onclick = (e) => {
     const b = e.target.closest('button');
     if (!b) return;
     const id = b.dataset.id;
     const cur = cart.get(id) || 0;
-    if (b.dataset.act === 'inc') cart.set(id, Math.min(50, cur + 1));
-    else if (cur > 1) cart.set(id, cur - 1);
-    else cart.delete(id);
+
+    if (b.dataset.act === 'inc') {
+      cart.set(id, Math.min(50, cur + 1));
+    } else if (cur > 1) {
+      cart.set(id, cur - 1);
+    } else {
+      cart.delete(id);
+    }
+
     renderMenu();
     renderCart();
   };
@@ -138,24 +152,12 @@ function renderCart() {
     if (!p) continue;
     const sub = p.preco * qty;
     total += sub;
-    html += `<div class="row"><span>${qty}× ${p.nome}</span><span>${fmt(sub)}</span></div>`;
+    html += `<div class="row"><span>${qty}× \( {p.nome}</span><span> \){fmt(sub)}</span></div>`;
   }
   html += `<div class="total"><span>Subtotal</span><span>${fmt(total)} <span class="pending">(servidor confirma)</span></span></div>`;
   el.innerHTML = html;
   btn.disabled = false;
 }
-
-$('goto-checkout').addEventListener('click', () => {
-  $('checkout').classList.remove('hidden');
-  $('confirm').classList.add('hidden');
-  updateCheckoutSummary();
-  $('checkout').scrollIntoView({ behavior: 'smooth' });
-});
-
-$('back-to-cart').addEventListener('click', () => {
-  $('checkout').classList.add('hidden');
-  $('carrinho').scrollIntoView({ behavior: 'smooth' });
-});
 
 // ---------- Checkout ----------
 let activeType = null;
@@ -182,11 +184,23 @@ function updateCheckoutSummary() {
     if (!p) continue;
     const sub = p.preco * qty;
     total += sub;
-    html += `<div class="row" style="display:flex;justify-content:space-between"><span>${qty}× ${p.nome}</span><span>${fmt(sub)}</span></div>`;
+    html += `<div class="row" style="display:flex;justify-content:space-between"><span>${qty}× \( {p.nome}</span><span> \){fmt(sub)}</span></div>`;
   }
   html += `<div class="total"><span>Total</span><span>${fmt(total)}</span></div>`;
   el.innerHTML = html;
 }
+
+$('goto-checkout').addEventListener('click', () => {
+  $('checkout').classList.remove('hidden');
+  $('confirm').classList.add('hidden');
+  updateCheckoutSummary();
+  $('checkout').scrollIntoView({ behavior: 'smooth' });
+});
+
+$('back-to-cart').addEventListener('click', () => {
+  $('checkout').classList.add('hidden');
+  $('carrinho').scrollIntoView({ behavior: 'smooth' });
+});
 
 $('checkout-form').addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -276,7 +290,7 @@ $('copy-key').addEventListener('click', async (e) => {
   }
 });
 
-// ---------- History (localStorage only) ----------
+// ---------- History ----------
 function loadHistory() {
   try { return JSON.parse(localStorage.getItem(HIST_KEY) || '[]'); }
   catch { return []; }
@@ -320,7 +334,7 @@ function renderHistory() {
       <div class="total">${fmt(o.total)}</div>
       <div class="items">${items}</div>
       <div class="actions">
-        ${o.wa ? `<a class="resend" target="_blank" rel="noopener" href="${o.wa}">Reabrir no WhatsApp</a>` : ''}
+        \( {o.wa ? `<a class="resend" target="_blank" rel="noopener" href=" \){o.wa}">Reabrir no WhatsApp</a>` : ''}
         <button class="remove" data-id="${o.id}">Remover</button>
       </div>`;
     card.querySelector('.remove').addEventListener('click', () => {
@@ -333,4 +347,3 @@ function renderHistory() {
 }
 
 boot();
-
