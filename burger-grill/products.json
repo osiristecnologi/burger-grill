@@ -44,12 +44,12 @@
     "categoria": "hamburguer"
   },
   {
-    "id": "top-fries",
-    "nome": "Top Fries",
-    "descricao": "Batata frita + Cheddar + Bacon + Cebola",
-    "preco": 24.90,
-    "imagem": "/assets/top-fries.jpg",
-    "categoria": "porcao"
+    "id": "xvegetariano",
+    "nome": "x-vegetariano",
+    "descricao": "Pão,5 fatias de queijo, ovo, maionese, batata palha, milho, ervilha, alface e tomate",
+    "preco": 14.90,
+    "imagem": "/assets/x-vegetariano.jpg",
+    "categoria": "hamburguer"
   },
   {
     "id": "frango-crispy",
