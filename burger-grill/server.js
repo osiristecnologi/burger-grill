@@ -1,4 +1,4 @@
-// Burger Grill backend
+// Butral Lanches backend
 // - No login, no admin, no DB.
 // - File persistence: products.json, orders.json, config.json.
 // - All pricing/validation is server-side.
@@ -255,5 +255,5 @@ app.get('/api/order/:id', (req, res) => {
 
 // ---------- Boot ----------
 app.listen(PORT, () => {
-  console.log(`Burger Grill running on http://localhost:${PORT}`);
+  console.log(`Brutal Lanches running on http://localhost:${PORT}`);
 });
