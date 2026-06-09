@@ -36,11 +36,11 @@
     "categoria": "hamburguer"
   },
   {
-    "id": "x-bacon",
+    "id": "x-Bacon",
     "nome": "X-Bacon",
-    "descricao": "Hambúrguer artesanal, queijo, bacon crocante",
-    "preco": 26.90,
-    "imagem": "/assets/x-bacon.jpg",
+    "descricao": "pao,queijo,bacon,carne,alface,tomate,batata,maionese",
+    "preco": 22.90,
+    "imagem": "/assets/x-Bacon.jpg",
     "categoria": "hamburguer"
   },
   {
