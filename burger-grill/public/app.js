@@ -1,8 +1,8 @@
-// Burger Grill - frontend
+// Butral Lanches - frontend
 // Sends only product IDs + quantities; backend computes prices.
 const $ = id => document.getElementById(id);
 const fmt = n => 'R$ ' + n.toFixed(2).replace('.', ',');
-const HIST_KEY = 'burgergrill:history';
+const HIST_KEY = 'brutallanches:history';
 
 const cart = new Map();
 let PRODUCTS = [];
